@@ -1,0 +1,82 @@
+<h3 id='loading'>Loading Data...</h3>
+
+<table id="table" style="display: none;">
+    <thead>
+        <th>id</th>
+        <th>name</th>
+        <th>year</th>
+        <th>color</th>
+        <th>pantone_value</th>
+    </thead>
+    <tbody class="body">
+    </tbody>
+</table>
+
+
+<script>
+    let productData = [];
+    const key = 'productData';
+
+    function pushDataToLocalStorage(value) {
+        const currentTime = new Date().getTime();
+        seconds = 3600; // 1 hour
+        const item = {
+            value, expiry: currentTime + seconds * 1000,
+        }
+        localStorage.setItem(key, JSON.stringify(item));
+    }
+
+    function pullDataFromLocalStorage() {
+        const data = localStorage.getItem(key);
+
+        if (data) {
+            const item = JSON.parse(data);
+            const currentTime = new Date().getTime();
+            if (currentTime > item.expiry) {
+                localStorage.removeItem(key);
+            } else {
+                return item.value;
+            }
+        }
+        return [];
+    }
+
+    function renderDataToTable() {
+        productData.forEach(element => {
+            $('.body').append(`
+                <tr>
+                    <td>${element.id}</td>
+                    <td>${element.name}</td>
+                    <td>${element.year}</td>
+                    <td>${element.color}</td>
+                    <td>${element.pantone_value}</td>
+                </tr>
+            `);
+        });
+        $('#loading').hide();
+        $('#table').show();
+    };
+
+    function loadData() {
+        $.ajax({
+            url: '/api/v1/products',
+            success: function (data, textStatus) {
+                productData = data;
+                pushDataToLocalStorage(data);
+                renderDataToTable();
+            },
+            fail: function (xhr, textStatus, errorThrown) {
+                alert('request failed');
+            }
+        })
+
+    }
+    $(document).ready(function () {
+        productData = pullDataFromLocalStorage();
+        if (productData.length) {
+            renderDataToTable();
+        } else {
+            loadData()
+        }
+    })
+</script>
