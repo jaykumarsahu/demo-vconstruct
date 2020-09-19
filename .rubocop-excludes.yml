@@ -1,0 +1,24 @@
+AllCops:
+  Exclude:
+  # Rubocop defaults
+  - vendor/**/*
+  - node_modules/**/*
+  - tmp/**/*
+
+  # Framework generated configuration files
+  - bin/**/*
+  - config/puma.rb
+  - config/spring.rb
+  - config/application.rb
+  - config/boot.rb
+  - config/deploy.rb
+  - config/deploy/production.rb
+  - config/environment.rb
+  - config/environments/development.rb
+  - config/environments/production.rb
+  - config/environments/test.rb
+  - db/schema.rb
+  - Capfile
+  - Rakefile
+  - config.ru
+  - Gemfile.lock
