@@ -1,6 +1,8 @@
 ### Used Gems
 - `faraday` to make http calls
 - `activerecord-import` to bulk inserting data into database using ORM
+- `kaminari` to maintain pagination
+- `rubocop`  to maintain conventions
 
 ### JavaScript Library Binding
 - JQuery
