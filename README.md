@@ -1,24 +1,19 @@
-# README
+### Used Gems
+- `faraday` to make http calls
+- `activerecord-import` to bulk inserting data into database using ORM
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### JavaScript Library Binding
+- JQuery
 
-Things you may want to cover:
+### Ruby Version
+- 2.7.0
 
-* Ruby version
+### Rails Version
+- 6.0.3
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Instructions
+1. run `bundle install` to load all gem dependencies
+2. update `database.yml` to establish the database connection
+3. run `rake import:products` to import products from 3rd party API
+4. run `rails s` to up to application
+5. open `localhost:3000` on browser
